@@ -25,11 +25,12 @@
     <h2 id="abstract">Abstract</h2>
 
     <p>
-      This SRFI defines a mechanism to define auxiliary syntax keywords
-      independently in different modules that still have the same binding so
-      that they can be used interchangeably as literal identifiers
-      in <code>syntax-rules</code> and <code>syntax-case</code> expressions and
-      can be both imported under the same name without conflicts.
+      This SRFI defines a mechanism for defining auxiliary syntax
+      keywords independently in different modules in such a way that
+      they still have the same binding so that they can be used
+      interchangeably as literal identifiers in
+      <code>syntax-rules</code> and <code>syntax-case</code> expressions
+      and can be both imported under the same name without conflicts.
     </p>
 
     <h2 id="issues">Issues</h2>
@@ -57,8 +58,8 @@
     </p>
 
     <p>
-      Matching against an unbounded identifier is problematic because
-      an unbounded identifier cannot be renamed.
+      Matching against an unbound identifier is problematic because
+      an unbound identifier cannot be renamed.
     </p>
 
     <p>
@@ -83,7 +84,7 @@
 
     <p>
       This SRFI defines therefore a mechanism for independent
-      libraries to independently export auxiliary syntax that have
+      libraries to independently export auxiliary syntax that has
       mutually the same bindings.
     </p>
 
@@ -94,9 +95,9 @@
     </p>
 
     <p>
-      This SRFI also defines a facility to define auxiliary syntax in
-      the above sense lexically locally.  This can be used to bring
-      back auxiliary syntax back into scope and can be interesting for
+      This SRFI also defines a facility for defining auxiliary syntax in
+      the above sense lexically locally.  This can be used to
+      auxiliary syntax back into scope and can be interesting for
       macro writers.
     </p>
 
@@ -167,7 +168,7 @@
       can, in import sets, only be referenced in the form <code>(only
       (srfi 206 *) 〈identifier〉…)</code>.  This import set imports
       the <code>〈identifier〉</code>s, each bound at top-level as if
-      through <code>define-auxiliary-syntax</code> to auxiliary syntax
+      through <code>define-auxiliary-syntax</code>, to auxiliary syntax
       with the respective name.
     </p>
 
