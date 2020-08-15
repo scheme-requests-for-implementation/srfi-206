@@ -120,15 +120,15 @@
     <h4>Matching of literal identifiers</h4>
 
     <p>
-      The following expression <pre>(let* ()
+      The following expression</p> <pre>(let* ()
   (define-auxiliary-syntax foo foo)
   (define-syntax is-foo?
     (syntax-rules (foo)
       ((_ foo) #t)
       ((_ _) #f)))
   (let* ()
-    (is-foo? foo)))</pre> evaluates to <code>#t</code> as does the
-    expression <pre>(let* ()
+    (is-foo? foo)))</pre> <p>evaluates to <code>#t</code> as does the
+    expression</p> <pre>(let* ()
   (define-auxiliary-syntax foo foo)
   (define-syntax is-foo?
     (syntax-rules (foo)
@@ -136,10 +136,10 @@
       ((_ _) #f)))
   (let* ()
     (define-auxiliary-syntax bar foo)
-    (is-foo? bar)))</pre></p>
+    (is-foo? bar)))</pre>
 
     <p>
-      On the other hand, <pre>(let* ()
+      On the other hand,</p> <pre>(let* ()
   (define-auxiliary-syntax foo foo)
   (define-syntax is-foo?
     (syntax-rules (foo)
@@ -148,22 +148,21 @@
   (let ()
     (define-syntax foo (syntax-rules ()))
     (is-foo? foo)))</pre>
-      evaluates to <code>#f</code>.
+      <p>evaluates to <code>#f</code>.
     </p>
 
     <h4>Importing from the magic library <code>(srfi 206 *)</code></h4>
 
     <p>
-      The library declaration
+      The library declaration</p>
       <pre>(import (rename (only (srfi 206 *) foo bar) (bar baz)))</pre>
-      is (apart from the binding of
+      <p>is (apart from the binding of
       the <code>define-auxiliary-syntax</code> identifier) equivalent to
-      the library declarations
+      the library declarations</p>
       <pre>(import (srfi 206))
 (begin
   (define-auxiliary-syntax foo foo)
   (define-auxiliary-syntax baz bar))</pre>
-    </p>
 
     <h4>Syntax parameters</h4>
 
@@ -174,14 +173,14 @@
     </p>
 
     <p>
-      For example, the following expression
+      For example, the following expression</p>
 <pre>
 (syntax-parameterize
     ((unquote
       (syntax-rules ()
         ((_ e) (eval e (environment '(scheme base)))))))
   (let ((x '(+ 1 2)))
-    (list `,x ,x)))</pre> evaluates to
+    (list `,x ,x)))</pre> <p>evaluates to
       <code>((+ 1 2) 3)</code>.
     </p>
 
