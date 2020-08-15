@@ -91,7 +91,7 @@
 
     <p>
       If syntax parameters are supported, this auxiliary syntax is a
-      syntax parameter so that it can be hygienically be rebound
+      syntax parameter so that it can be hygienically be updated
       through <code>syntax-parameterize</code>.
     </p>
 
@@ -113,6 +113,76 @@
       hygienic keywords was that independent libraries may want to
       independently export hygienic keywords under the same name
       without conflicts.  That is now possible with this SRFI.
+    </p>
+
+    <h3>Examples</h3>
+
+    <h4>Matching of literal identifiers</h4>
+
+    <p>
+      The following expression <pre>(let* ()
+  (define-auxiliary-syntax foo foo)
+  (define-syntax is-foo?
+    (syntax-rules (foo)
+      ((_ foo) #t)
+      ((_ _) #f)))
+  (let* ()
+    (is-foo? foo)))</pre> evaluates to <code>#t</code> as does the
+    expression <pre>(let* ()
+  (define-auxiliary-syntax foo foo)
+  (define-syntax is-foo?
+    (syntax-rules (foo)
+      ((_ foo) #t)
+      ((_ _) #f)))
+  (let* ()
+    (define-auxiliary-syntax bar foo)
+    (is-foo? bar)))</pre></p>
+
+    <p>
+      On the other hand, <pre>(let* ()
+  (define-auxiliary-syntax foo foo)
+  (define-syntax is-foo?
+    (syntax-rules (foo)
+      ((_ foo) #t)
+      ((_ _) #f)))
+  (let ()
+    (define-syntax foo (syntax-rules ()))
+    (is-foo? foo)))</pre>
+      evaluates to <code>#f</code>.
+    </p>
+
+    <h4>Importing from the magic library <code>(srfi 206 *)</code></h4>
+
+    <p>
+      The library declaration
+      <pre>(import (rename (only (srfi 206 *) foo bar) (bar baz)))</pre>
+      is (apart from the binding of
+      the <code>define-auxiliary-syntax</code> identifier) equivalent to
+      the library declarations
+      <pre>(import (srfi 206))
+(begin
+  (define-auxiliary-syntax foo foo)
+  (define-auxiliary-syntax baz bar))</pre>
+    </p>
+
+    <h4>Syntax parameters</h4>
+
+    <p>
+      When auxiliary syntax is <code>syntax-parameterize</code>d, its
+      identity (as far as <code>free-identifier=?</code> is concerned)
+      does not change.
+    </p>
+
+    <p>
+      For example, the following expression
+<pre>
+(syntax-parameterize
+    ((unquote
+      (syntax-rules ()
+        ((_ e) (eval e (environment '(scheme base)))))))
+  (let ((x '(+ 1 2)))
+    (list `,x ,x)))</pre> evaluates to
+      <code>((+ 1 2) 3)</code>.
     </p>
 
     <h2 id="specification">Specification</h2>
