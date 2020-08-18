@@ -262,10 +262,25 @@
 	190</a>) shall be bound through <code>define-auxiliary-syntax</code>.
     </p>
 
+    <p>
+      It is recommended to maintain a list of auxiliary syntax used by
+      Scheme standards and
+      implementations <a href="https://registry.scheme.org/">at the
+      Scheme Registry</a>.
+    </p>
+
     <h2 id="implementation">Implementation</h2>
 
     <p>This SRFI cannot be implemented portably in R6RS or R7RS
       alone.  A sample implementation for Chibi-Scheme will be provided.
+    </p>
+
+    <p>
+      A portable, but incomplete poor man's solution is
+      provided <a href="https://github.com/scheme-requests-for-implementation/srfi-206/tree/master">in
+      the repository</a>.  It will be expanded over time while a
+      registry of auxiliary keywords is being built and while native
+      implementations are catching up.
     </p>
 
     <p>
@@ -281,8 +296,6 @@
       In a given environment, these labels resolve to suitable
       transformers.
     </p>
-
-    <!-- <a href="srfi minus ???-sample.scm">Source for the sample implementation.</a> -->
 
     <h2 id="acknowledgements">Acknowledgements</h2>
 
