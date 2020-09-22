@@ -21,29 +21,25 @@
 ;; CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ;; SOFTWARE.
 
-(define-library (srfi 206 *)
-  (cond-expand
-    (else
-     (include-library-declarations "*-exports.scm")
-     (import (scheme base))
-     (cond-expand
-       ((library (srfi 139))
-        (import (srfi 139)))
-       (else
-        (import (rename (scheme base) (define-syntax define-syntax-parameter)))))
-     (cond-expand
-       (else
-        (begin
-          (define-syntax define-identifier-syntax-parameter
-            (syntax-rules ()
-              ((_ name e)
-               (define-syntax name
-                 (syntax-rules ()
-                   ((_ . _) e)))))))))
-     (begin
-       (define-syntax define-auxiliary-syntax
-         (syntax-rules ()
-           ((_ name)
-            (define-identifier-syntax-parameter name
-              (syntax-error "invalid use of auxiliary syntax" name))))))
-     (include "*-definitions.scm"))))
+;; syntax-case
+(define-auxiliary-syntax unsyntax)
+(define-auxiliary-syntax unsyntax-splicing)
+
+;; SRFI 26
+(define-auxiliary-syntax <>)
+(define-auxiliary-syntax <...>)
+
+;; SRFI 190
+(define-auxiliary-syntax yield)
+
+;; SRFI 204
+(define-auxiliary-syntax $)
+(define-auxiliary-syntax ?)
+(define-auxiliary-syntax get!)
+(define-auxiliary-syntax ***)
+(define-auxiliary-syntax ___)
+(define-auxiliary-syntax **1)
+(define-auxiliary-syntax =..)
+(define-auxiliary-syntax *..)
+(define-auxiliary-syntax struct)
+(define-auxiliary-syntax object)

@@ -37,9 +37,7 @@
 
     <h2 id="issues">Issues</h2>
 
-    <ul>
-      <li>The sample Chibi-Scheme implementation is yet a work in progress.</li>
-    </ul>
+    <p>None at present.</p>
 
     <h2 id="rationale">Rationale</h2>
 
@@ -152,11 +150,11 @@
       <p>evaluates to <code>#f</code>.
     </p>
 
-    <h4>Importing from the magic library <code>(srfi 206 *)</code></h4>
+    <h4>Importing from the magic library <code>(srfi 206 all)</code></h4>
 
     <p>
       The library declaration</p>
-      <pre>(import (rename (only (srfi 206 *) foo bar) (bar baz)))</pre>
+      <pre>(import (rename (only (srfi 206 all) foo bar) (bar baz)))</pre>
       <p>is (apart from the binding of
       the <code>define-auxiliary-syntax</code> identifier) equivalent to
       the library declarations</p>
@@ -194,7 +192,7 @@
       form, <code>define-auxiliary-syntax</code>.
     </p>
 
-    <p><code>(define-auxiliary-syntax〈keyword〉〈symbol〉)</code></p>
+    <p><code>(define-auxiliary-syntax ⟨keyword⟩ ⟨symbol⟩)</code></p>
 
     <p>
       This form is a definition that can be used wherever syntax
@@ -202,12 +200,12 @@
     </p>
 
     <p>
-      The <code>〈keyword〉</code> is
-      bound to (auxiliary) syntax named by <code>〈symbol〉</code>.
+      The <code>⟨keyword⟩</code> is
+      bound to (auxiliary) syntax named by <code>⟨symbol⟩</code>.
     </p>
 
     <p>
-      A <code>〈keyword〉</code> bound
+      A <code>⟨keyword⟩</code> bound
       through <code>define-auxiliary-syntax</code> has the same
       binding as another identifier (that is, they
       are <code>free-identifier=?</code>) if and only if the other
@@ -226,7 +224,7 @@
 
     <p>
       This SRFI defines two libraries, <code>(srfi 206)</code>
-      and <code>(srfi 206 *)</code>.
+      and <code>(srfi 206 all)</code>.
     </p>
 
     <p>
@@ -235,10 +233,10 @@
     </p>
 
     <p>
-      The library <code>(srfi 206 *)</code> is a (magic) library that
+      The library <code>(srfi 206 all)</code> is a (magic) library that
       can, in import sets, only be referenced in the form <code>(only
-      (srfi 206 *) 〈identifier〉…)</code>.  This import set imports
-      the <code>〈identifier〉</code>s, each bound at top-level as if
+      (srfi 206 all) ⟨identifier⟩…)</code>.  This import set imports
+      the <code>⟨identifiers⟩</code>, each bound at top-level as if
       through <code>define-auxiliary-syntax</code>, to auxiliary syntax
       with the respective name.
     </p>
@@ -271,8 +269,10 @@
 
     <h2 id="implementation">Implementation</h2>
 
-    <p>This SRFI cannot be implemented portably in R6RS or R7RS
-      alone.  A sample implementation for Chibi-Scheme will be provided.
+    <p>This SRFI cannot be implemented portably in R6RS or R7RS alone.
+      A complete sample implementation is provided by
+      the <a href="https://www.unsyntax.org">Unsyntax implementation
+      of the Scheme programming language</a>.
     </p>
 
     <p>
@@ -284,17 +284,26 @@
     </p>
 
     <p>
+      While this SRFI cannot be implemented in a portable way, in view
+      of the existence of the portable poor man's implementation of
+      the library <code>(srfi 206 all)</code>, users that aim for
+      maximal portability are adviced to solely import the
+      library <code>(srfi 206 all)</code> as long as they do not need
+      the extra features from the library <code>(srfi 206)</code>.
+    </p>
+
+    <p>
       In
       the <a href="https://pdfs.semanticscholar.org/f8f6/d3b704b0ec83d9803377fdb88996853813b1.pdf">original
       syntax model of the syntax-case expander by R. Kent Dybvig et
       al.</a> two bound identifiers are <code>free-identifier=?</code>
       if and only if their associated labels are the same.  An
-      implementation following this model thus has to maintain a
-      (weak) hash-table mapping (symbolic) names to labels.  Whenever
-      auxiliary syntax with some name is defined the associated label
-      is looked up or, if it does not exist yet, created on the fly.
-      In a given environment, these labels resolve to suitable
-      transformers.
+      implementation following this model can designate special
+      labels, one for each symbol, naming auxiliary syntax.  Whenever
+      auxiliary syntax with some name is defined the defined
+      identifier will be labelled with such a special label.  When
+      such a a label is looked up, a suitable transformer is returned,
+      which can be created on the fly.
     </p>
 
     <h2 id="acknowledgements">Acknowledgements</h2>
@@ -307,7 +316,10 @@
 
     <p>
       Special thanks go to John Cowan for reviewing a pre-draft of
-      this SRFI.
+      this SRFI, to Jim Rees for sharing his experience with
+      implementing this SRFI, to Felix Thibault for testing and using
+      this SRFI in his SRFI 206, and to Alex Shinn for providing
+      extensive feedback on the mailing list.
     </p>
 
     <h2 id="copyright">Copyright</h2>

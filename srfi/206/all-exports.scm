@@ -21,24 +21,14 @@
 ;; CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ;; SOFTWARE.
 
-;; syntax-case
-(define-auxiliary-syntax unsyntax)
-(define-auxiliary-syntax unsyntax-splicing)
-
-;; SRFI 26
-(define-auxiliary-syntax <>)
-(define-auxiliary-syntax <...>)
-
-;; SRFI 190
-(define-auxiliary-syntax yield)
-
-;; SRFI 204
-(define-auxiliary-syntax $)
-(define-auxiliary-syntax @)
-(define-auxiliary-syntax ?)
-(define-auxiliary-syntax get!)
-(define-auxiliary-syntax ***)
-(define-auxiliary-syntax ___)
-(define-auxiliary-syntax ..1)
-(define-auxiliary-syntax struct)
-(define-auxiliary-syntax object)
+(export
+ ;; R7RS
+ else => unquote unquote-splicing _ ...
+ ;; syntax-case
+ unsyntax unsyntax-splicing
+ ;; SRFI 26
+ <> <...>
+ ;; SRFI 190
+ yield
+ ;; SRFI 204
+ $ ? get! *** ___ **1 =.. *.. struct object)

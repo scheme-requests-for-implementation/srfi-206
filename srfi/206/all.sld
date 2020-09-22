@@ -21,14 +21,29 @@
 ;; CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ;; SOFTWARE.
 
-(export
- ;; R7RS
- else => unquote unquote-splicing _ ...
- ;; syntax-case
- unsyntax unsyntax-splicing
- ;; SRFI 26
- <> <...>
- ;; SRFI 190
- yield
- ;; SRFI 204
- $ @ ? get! *** ___ ..1 struct object)
+(define-library (srfi 206 all)
+  (cond-expand
+    (else
+     (include-library-declarations "all-exports.scm")
+     (import (scheme base))
+     (cond-expand
+       ((library (srfi 139))
+        (import (srfi 139)))
+       (else
+        (import (rename (scheme base) (define-syntax define-syntax-parameter)))))
+     (cond-expand
+       (else
+        (begin
+          (define-syntax define-identifier-syntax-parameter
+            (syntax-rules ()
+              ((_ name e)
+               (define-syntax name
+                 (syntax-rules ()
+                   ((_ . _) e)))))))))
+     (begin
+       (define-syntax define-auxiliary-syntax
+         (syntax-rules ()
+           ((_ name)
+            (define-identifier-syntax-parameter name
+              (syntax-error "invalid use of auxiliary syntax" name))))))
+     (include "all-definitions.scm"))))
