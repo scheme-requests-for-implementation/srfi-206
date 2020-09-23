@@ -6,6 +6,25 @@
     <link href="/favicon.png" rel="icon" sizes="192x192" type="image/png">
     <link rel="stylesheet" href="https://srfi.schemers.org/srfi.css" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body
+      {
+          font-family: serif;
+      }
+      span.token
+      {
+          font-family: serif;
+      }
+      span.token::before
+      {
+          content: "〈";
+      }
+      span.token::after
+      {
+          content: "〉";
+      }
+      pre { font-size: 0.8em; }
+    </style>
   </head>
   <body>
     <h1><a href="https://srfi.schemers.org/"><img class="srfi-logo"
@@ -193,7 +212,7 @@
       form, <code>define-auxiliary-syntax</code>.
     </p>
 
-    <p><code>(define-auxiliary-syntax ⟨keyword⟩ ⟨symbol⟩)</code></p>
+    <p><code>(define-auxiliary-syntax <span class="token">keyword</span> <span class="token">symbol</span>)</code></p>
 
     <p>
       This form is a definition that can be used wherever syntax
@@ -201,12 +220,12 @@
     </p>
 
     <p>
-      The <code>⟨keyword⟩</code> is
-      bound to (auxiliary) syntax named by <code>⟨symbol⟩</code>.
+      The <code><span class="token">keyword</span></code> is
+      bound to (auxiliary) syntax named by <code><span class="token">symbol</span></code>.
     </p>
 
     <p>
-      A <code>⟨keyword⟩</code> bound
+      A <code><span class="token">keyword</span></code> bound
       through <code>define-auxiliary-syntax</code> has the same
       binding as another identifier (that is, they
       are <code>free-identifier=?</code>) if and only if the other
@@ -236,8 +255,8 @@
     <p>
       The library <code>(srfi 206 all)</code> is a (magic) library that
       can, in import sets, only be referenced in the form <code>(only
-      (srfi 206 all) ⟨identifier⟩…)</code>.  This import set imports
-      the <code>⟨identifiers⟩</code>, each bound at top-level as if
+      (srfi 206 all) <span class="token">identifier</span> &hellip;)</code>.  This import set imports
+      the <code><span class="token">identifiers</span></code>, each bound at top-level as if
       through <code>define-auxiliary-syntax</code>, to auxiliary syntax
       with the respective name.
     </p>
