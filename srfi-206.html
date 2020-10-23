@@ -213,11 +213,18 @@
     </p>
 
     <p><code>(define-auxiliary-syntax <span class="token">keyword</span> <span class="token">symbol</span>)</code></p>
+    <p><code>(define-auxiliary-syntax <span class="token">keyword</span>)</code></p>
 
     <p>
       This form is a definition that can be used wherever syntax
       definitions are allowed.
     </p>
+
+    <p>
+      The second form is an abbreviation of the first form when
+      <code><span class="token">symbol</span></code> is just the
+      symbolic name of the keyword
+      <code><span class="token">keyword</span></code>.</p>
 
     <p>
       The <code><span class="token">keyword</span></code> is
