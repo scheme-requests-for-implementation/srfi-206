@@ -10,7 +10,7 @@ This repository hosts [[https://srfi.schemers.org/srfi-206/][SRFI 206]]: Auxilia
 
 This SRFI is in /draft/ status.
 
-See also [[https://srfi.schemers.org/srfi-139/][SRFI 139: Syntax parameters]].
+See also [[https://srfi.schemers.org/srfi-139/][SRFI 139: Syntax parameters]] and [[https://srfi.schemers.org/srfi-213/][SRFI 213: Identifier Properties]].
 
 The full documentation for this SRFI can be found in the [[https://srfi.schemers.org/srfi-206/srfi-206.html][SRFI Document]].
 
