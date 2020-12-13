@@ -179,7 +179,7 @@
       <p>is (apart from the binding of
       the <code>define-auxiliary-syntax</code> identifier) equivalent to
       the library declarations</p>
-      <pre>(import (srfi 206))
+      <pre>(import (only (srfi 206) define-auxiliary-syntax))
 (begin
   (define-auxiliary-syntax foo foo)
   (define-auxiliary-syntax baz bar))</pre>
@@ -204,13 +204,31 @@
       <code>((+ 1 2) 3)</code>.
     </p>
 
+    <h4>Inspection</h4>
+
+    <p>We can detect auxiliary syntax bindings and inspect their names
+      in macros using an identifier property:</p>
+
+<pre>
+(define-syntax get-auxiliary-syntax-name
+  (lambda (stx)
+    (lambda (lookup)
+      (syntax-case stx ()
+        ((_ x) #`'#,(datum->syntax #&apos;* (lookup #&apos;x #&apos;auxiliary-syntax-name)))))</pre>
+
+    <p>If <code><span class="token">identifier</span></code> is bound
+      to auxiliary syntax, the
+      expression <code>(get-auxiliary-syntax-name <span class="token">identifier</span>)</code>
+      evaluates to the symbolic name of the auxiliary syntax.</p>
+
     <h2 id="specification">Specification</h2>
 
     <h3>Syntax</h3>
 
     <p>
       This SRFI defines one syntax binding
-      form, <code>define-auxiliary-syntax</code>.
+      form, <code>define-auxiliary-syntax</code>, and another
+      binding, <code>auxiliary-syntax-name</code>.
     </p>
 
     <p><code>(define-auxiliary-syntax <span class="token">keyword</span> <span class="token">symbol</span>)</code></p>
@@ -242,6 +260,16 @@
       name.
     </p>
 
+    <p>To each such binding,
+    a <a href="https://srfi.schemers.org/srfi-213/srfi-213.html">SRFI
+    213</a> property is implicitly attached.  The key of the property
+    is given by the binding of <code>auxiliary-syntax-name</code> and
+    the value of the property is the symbolic name of the auxiliary
+    syntax.</p>
+
+    <p>It is an error at explicitely attach an identifier property to
+    any identifier using the key <code>auxiliary-syntax-name</code>.</p>
+
     <p>
       In a Scheme supporting syntax parameters
       (see <a href="https://srfi.schemers.org/srfi-139/srfi-139.html">SRFI
@@ -256,8 +284,9 @@
     </p>
 
     <p>
-      The <code>define-auxiliary-syntax</code> keyword is (the sole
-      identifier) exported by the library <code>(srfi 206)</code>.
+      The <code>define-auxiliary-syntax</code> keyword and <code>
+      </code> and the <code>auxiliary-syntax-name</code> binding are the two
+      identifiers exported by the library <code>(srfi 206)</code>.
     </p>
 
     <p>
