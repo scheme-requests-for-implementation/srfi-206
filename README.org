@@ -8,7 +8,7 @@ keywords: [[https://srfi.schemers.org/?keywords=syntax][Syntax]]
 
 This repository hosts [[https://srfi.schemers.org/srfi-206/][SRFI 206]]: Auxiliary Syntax Keywords, a [[https://srfi.schemers.org/][Scheme Request for Implementation]].
 
-This SRFI is in /draft/ status.
+This SRFI is in /final/ status.
 
 See also [[https://srfi.schemers.org/srfi-139/][SRFI 139: Syntax parameters]] and [[https://srfi.schemers.org/srfi-213/][SRFI 213: Identifier Properties]].
 
